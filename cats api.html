@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cats Api</title>
+  <link rel="stylesheet" href="css/api-style.css">
+  <link rel="stylesheet" href="css/popup.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/form.css">
+  <script src="https://kit.fontawesome.com/3e2b3d0dcf.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js" defer></script>
+
+
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <header>
+      <div class="container">
+        <div class="menu">
+          <div class="menu-info">
+            <div class="logo">
+              <a class="logo-image" href="#"><img src="img/logo.png" alt="logo"></a>
+            </div>
+            <div class="menu-title">Мои Котики</div>
+          </div>
+
+          <div class="buttons">
+            <button class="btn add-new-cat" id="add"><i class="fa-solid fa-plus"></i></button>
+            <button class="btn" id="login">Войти</button>
+          </div>
+        </div>
+      </div>
+
+    </header>
+    <main class="main content">
+      <div class="container">
+        <div class="cards"></div>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="container footer__container">
+        <span class="copyright">©2022 Made by Name</span>
+
+        <div class="socials">
+          <a class="socials__link" href="#"><i class="fa-brands fa-github socials__icon"></i></a>
+          <a class="socials__link" href="#"><i class="fa-brands fa-vk socials__icon"></i></a>
+          <a class="socials__link" href="#"><i class="fa-brands fa-telegram socials__icon"></i></a>
+          </nav>
+        </div>
+    </footer>
+    <div class="popup popup-cat-image">
+      <div class="popup__container">
+        <button class="popup__close btn popup__close_external"><i class="fa-solid fa-xmark"></i></button>
+        <img src="#" class="popup__image" alt="">
+      </div>
+    </div>
+    <div class="popup popup-add">
+      <div class="popup__container">
+        <button class="popup__close btn"><i class="fa-solid fa-xmark"></i></button>
+        <h2 class="popupTitle">Изменить питомцев</h2>
+        <form class="form" id="popup-form-add">
+          <div class="form__image"></div>
+          <div class="radio-action">
+            <label class="form__checkbox-wrap">
+              <input type="radio" name="action" value="add" class="form__checkbox" placeholder="">
+              <span class="form__label">Добавить</span>
+              <span class="form__fake-checkbox"><i class="fa-regular fa-circle-check"></i></span>
+            </label>
+            <label class="form__checkbox-wrap">
+              <input type="radio" name="action" value="change" class="form__checkbox" placeholder="">
+              <span class="form__label">Изменить</span>
+              <span class="form__fake-checkbox"><i class="fa-regular fa-circle-check"></i></span>
+            </label>
+            <label class="form__checkbox-wrap">
+              <input type="radio" name="action" value="delete" class="form__checkbox" placeholder="">
+              <span class="form__label">Удалить</span>
+              <span class="form__fake-checkbox"><i class="fa-regular fa-circle-check"></i></span>
+            </label>
+          </div>
+          <input type="number" class="form__input" name="id" min="1" required placeholder="id">
+          <input type="number" class="form__input" name="age" placeholder="Возраст">
+          <input type="text" class="form__input" name="name" placeholder="Имя">
+          <input type="number" class="form__input" name="rate" placeholder="Рейтинг (0-10)" min="0" max="10">
+          <textarea name="description" class="form__input form__textarea" placeholder="Описание"></textarea>
+          <label class="form__checkbox-wrap">
+            <input type="radio" name="favorite" class="form__checkbox" placeholder="">
+            <span class="form__label">Любимчик</span>
+            <span class="form__fake-checkbox"><i class="fa-regular fa-circle-check"></i></span>
+          </label>
+
+          <input type="url" class="form__input" name="image" placeholder="Ссылка на фото">
+          <button type="submit" class="form__btn btn">Добавить котика</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup-login">
+      <div class="popup__container">
+        <button class="popup__close btn"><i class="fa-solid fa-xmark"></i></button>
+        <h2>Авторизация</h2>
+        <form class="form" id="popup-form-login">
+          <input type="email" class="form__input" name="email" required placeholder="email">
+          <input type="password" class="form__input" name="password" placeholder="password">
+          <button type="submit" class="form__btn btn">Войти</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <template id="card-template">
+    <div class="card">
+      <img src="#" alt="cat" class="card__image">
+      <a href="#" class="card__link">
+        <h2 class="card__name">Pussy</h2>
+      </a>
+      <button class="card__like" aria-label="Поставить лайк"><i
+          class="fa-solid fa-heart fa-2x like__heart"></i></button>
+    </div>
+  </template>
+  <!-- <script src="js/cats.js" defer></script>
+<script src="js/api.js" defer></script>
+<script src="js/card.js" defer></script>
+<script src="js/popup.js" defer></script>
+<script src="js/popup-image.js" defer></script> -->
+  <script src="js/index.js" type="module" defer></script>
+
+  <!-- <script src="fa/js/all.min.js" defer></script> -->
+</body>
+
+</html>
