@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    box-sizing: border-box;
+}
+
 /*var*/
 
 :root {
@@ -143,6 +148,9 @@
 
 /*main*/
 
+main {
+    min-height: 100%;
+}
 
 /*cards*/
 
