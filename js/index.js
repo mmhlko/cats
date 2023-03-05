@@ -55,12 +55,12 @@ function handleFromAddCat(e) {
     let elementsFormCat;
     let formData;
     if (formCatAdd.closest('.popup').classList.contains('popup-active')) {
-        console.log('add');
+        //console.log('add');
         elementsFormCat = [...formCatAdd.elements]; //собирает массив из всех элементов внутри формы
         formData = serializeForm(elementsFormCat); //а потом достает из него то, что нужно в функции serializeForm
 
     } else if (formCatEdit.closest('.popup').classList.contains('popup-active')) {
-        console.log('edit');
+        //console.log('edit');
         elementsFormCat = [...formCatEdit.elements]; //собирает массив из всех элементов внутри формы
         formData = serializeForm(elementsFormCat); //а потом достает из него то, что нужно в функции serializeForm
         formData.action = 'change'
@@ -72,7 +72,7 @@ function handleFromAddCat(e) {
         delete formData.action;
         api.addNewCat(formData) //при нажатии ОТПРАВИТЬ добавляет кота в БД
             .then(data => {
-                alert(JSON.stringify(data));
+                alert(data.message);
                 
                 createCard(formData);
                 updateLocalStorage(formData, {type: 'ADD_CAT'})
@@ -85,8 +85,8 @@ function handleFromAddCat(e) {
         
         api.updateCatBuId(formData.id, formData)
             .then(data => {
-                updateLocalStorage(formData, {type: 'ALL_CATS'})
-                alert(JSON.stringify(data))}
+                updateLocalStorage(formData, {type: 'ALL_CATS'});
+                alert(data.message)}
                 )
             .catch(err => console.log(Error(err)))
     }
@@ -117,7 +117,7 @@ function handleDeleteCat(catData) { //удаляет карточку
     api.deleteCat(catData.id)
             .then(data => {
                 updateLocalStorage(catData, {type: 'ALL_CATS'})
-                alert(JSON.stringify(data))
+                alert(data.message);
             })
             .catch(err => console.log(Error(err)))
 }
