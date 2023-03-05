@@ -32,9 +32,9 @@ export class Card {
         const cardInfoBtn = this.#element.querySelector('.card__link');
        cardTitle.innerText = this.#data.name;
        cardImage.src = this.#data.image;
-/*        if (!this.#data.favorite) {
+        if (!this.#data.favorite) {
         cardlike.remove();
-       } */
+       } 
        cardlike.value = this.#data.favorite;
 
        cardImage.addEventListener('click', () => {

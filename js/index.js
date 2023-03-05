@@ -135,7 +135,7 @@ function handleFromLogin(e) {
 }
 
 function setDataRefresh(minutes, key) {
-    const setTime = new Date(new Date().getTime() + minutes*60000);
+    const setTime = new Date(new Date().getTime() + minutes*30000);
     localStorage.setItem(key, setTime)
 
     return setTime

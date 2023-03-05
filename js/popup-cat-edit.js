@@ -22,7 +22,7 @@ export class PopupEditCat extends Popup {
         catUrl.value = catData.image;
         catAge.value = catData.age;
         catRate.value = catData.rate;
-        catLike.value = catData.favorite;
+        catLike.checked = catData.favorite;
         catDescription.value = catData.description;
         
         
