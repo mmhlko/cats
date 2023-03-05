@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="css/popup.css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/form.css">
-  <script src="https://kit.fontawesome.com/3e2b3d0dcf.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/edit-cat-popup.css">
+  <script src="https://kit.fontawesome.com/3e2b3d0dcf.js" crossorigin="anonymous" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js" defer></script>
 
 
@@ -55,6 +56,18 @@
       <div class="popup__container">
         <button class="popup__close btn popup__close_external"><i class="fa-solid fa-xmark"></i></button>
         <img src="#" class="popup__image" alt="">
+        <div class="catInfo">
+          <h4>Информация о котике</h4>
+          <p class="cat-info-title">ID:<span class="cat__info-id cat__info-value" name="id"></span></p>
+          <p class="cat-info-title">Имя:<span class="cat__info-name cat__info-value" name="name"></span></p>
+          <p class="cat-info-title">Возраст:<span class="cat__info-age cat__info-value" name="age"></span></p>
+          <p class="cat-info-title">Рейтинг:<span class="cat__info-rate cat__info-value" name="rate"></span></p>
+          <p class="cat-info-title">Любимчик:<span class="cat__info-favorite cat__info-value" name="favorite"></span>
+          </p>
+          <p class="cat-info-title">Описание:<span class="cat__info-description cat__info-value"
+              name="description"></span></p>
+
+        </div>
       </div>
     </div>
     <div class="popup popup-add">
@@ -107,6 +120,46 @@
         </form>
       </div>
     </div>
+    <div class="popup popup-edit-cat" data-type="upd">
+      <div class="modal-container">
+        <div class="popup__close modal-close">
+          <i class="fa-solid fa-xmark"></i>
+        </div>
+        <h2>Изменить котика</h2>
+        <form id="upd">
+          <div class="form-line">
+            <label for="upd1">ID</label>
+            <input class="cat__edit-form" type="number" id="upd1" name="id" required="" disabled="" placeholder="1" min="1">
+          </div>
+          <div class="form-line form-span-2">
+            <label for="upd2">Имя</label>
+            <input class="cat__edit-form" type="text" id="upd2" name="name" required="" placeholder="Леопольд">
+          </div>
+          <div class="form-line form-span-3">
+            <label for="upd3">Изображение</label>
+            <input class="cat__edit-form" type="url" id="upd3" name="image" placeholder="Ссылка на изображение">
+          </div>
+          <div class="form-line">
+            <label for="upd4">Возраст</label>
+            <input class="cat__edit-form" type="number" id="upd4" name="age" placeholder="4" min="0" max="100">
+          </div>
+          <div class="form-line">
+            <label for="upd5">Рейтинг</label>
+            <input class="cat__edit-form" type="number" id="upd5" name="rate" min="0" max="5" placeholder="5">
+          </div>
+          <div class="form-line form-row">
+            <input class="cat__edit-form" type="checkbox" id="upd6" name="favorite">
+            <label for="upd6">Любимчик</label>
+          </div>
+          <div class="form-line form-span-3">
+            <label for="upd7">Описание</label>
+            <textarea class="cat__edit-form" type="text" id="upd7" name="description" placeholder="Напишите что-нибудь про своего питомца"
+              rows="3"></textarea>
+          </div>
+          <button class="btn" type="submit">Обновить</button>
+        </form>
+      </div>
+    </div>
   </div>
   <template id="card-template">
     <div class="card">
@@ -114,8 +167,12 @@
       <a href="#" class="card__link">
         <h2 class="card__name">Pussy</h2>
       </a>
-      <button class="card__like" aria-label="Поставить лайк"><i
-          class="fa-solid fa-heart fa-2x like__heart"></i></button>
+      <button class="card__like" aria-label="Поставить лайк">
+        <i class="fa-solid fa-heart fa-2x like__heart"></i>
+      </button>
+      <button class="btn card__btn edit__btn"><i class="fa-sharp fa-solid fa-pen-to-square"></i></i></button>
+      <button class="btn card__btn delete__btn"><i class="fa-sharp fa-solid fa-trash"></i></button>
+
     </div>
   </template>
   <!-- <script src="js/cats.js" defer></script>

@@ -2,19 +2,29 @@ import { Card } from "./card.js";
 import { PopupWithImage } from "./popup-image.js";
 import { Popup } from "./popup.js";
 import { api } from "./api.js";
+import { PopupEditCat } from "./popup-cat-edit.js";
+
+
 
 
 const cardContainer = document.querySelector('.cards');
 const btnOpenPopup = document.querySelector('.add-new-cat');
 const btnLogin = document.querySelector('#login');
+
 const formCatAdd = document.querySelector('#popup-form-add');
+
 const formAuthLogin = document.querySelector('#popup-form-login');
+const formCatEdit = document.querySelector('#upd'); //форма обновления котика
 const isAuth = Cookies.get('email');
 const MAX_LIVE_STORAGE = 10;
 
+
+
 const popupAdd = new Popup('popup-add');
 const popupCatImage = new PopupWithImage('popup-cat-image');
-const popupLogin = new Popup('popup-login')
+const popupLogin = new Popup('popup-login');
+const popupEdit = new PopupEditCat('popup-edit-cat');
+
 
 function serializeForm(elements) { //собирает данные из массива формы для добавления карточки
     const formData = {};
@@ -39,11 +49,25 @@ function serializeForm(elements) { //собирает данные из масс
     return formData;
 }
 
+
 function handleFromAddCat(e) {
     e.preventDefault();
-    const elementsFormCat = [...formCatAdd.elements]; //собирает массив из всех элементов внутри формы
-    const formData = serializeForm(elementsFormCat); //а потом достает из него то, что нужно в функции serializeForm
+    let elementsFormCat;
+    let formData;
+    if (formCatAdd.closest('.popup').classList.contains('popup-active')) {
+        console.log('add');
+        elementsFormCat = [...formCatAdd.elements]; //собирает массив из всех элементов внутри формы
+        formData = serializeForm(elementsFormCat); //а потом достает из него то, что нужно в функции serializeForm
 
+    } else if (formCatEdit.closest('.popup').classList.contains('popup-active')) {
+        console.log('edit');
+        elementsFormCat = [...formCatEdit.elements]; //собирает массив из всех элементов внутри формы
+        formData = serializeForm(elementsFormCat); //а потом достает из него то, что нужно в функции serializeForm
+        formData.action = 'change'
+    }
+     
+    
+    
     if (formData.action === 'add') {
         delete formData.action;
         api.addNewCat(formData) //при нажатии ОТПРАВИТЬ добавляет кота в БД
@@ -58,6 +82,7 @@ function handleFromAddCat(e) {
 
     if (formData.action === 'change') {
         delete formData.action;
+        
         api.updateCatBuId(formData.id, formData)
             .then(data => {
                 updateLocalStorage(formData, {type: 'ALL_CATS'})
@@ -67,21 +92,34 @@ function handleFromAddCat(e) {
     }
     if (formData.action === 'delete') {
         delete formData.action;
-        api.deleteCat(formData.id)
-            .then(data => {
-                updateLocalStorage(formData, {type: 'ALL_CATS'})
-                alert(JSON.stringify(data))
-            })
-            .catch(err => console.log(Error(err)))
+        handleDeleteCat(formData);
     }
 
     popupAdd.close();
+    popupEdit.close();
 
 
 }
 
 function handleOpenCatImage(dataSrc) { //открывает попап с картинкой кота
     popupCatImage.open(dataSrc)
+}
+
+
+
+function handleOpenCatEdit(catData) { //открывает попап с редактированием
+    
+    popupEdit.open(catData)
+}
+
+function handleDeleteCat(catData) { //удаляет карточку
+     
+    api.deleteCat(catData.id)
+            .then(data => {
+                updateLocalStorage(catData, {type: 'ALL_CATS'})
+                alert(JSON.stringify(data))
+            })
+            .catch(err => console.log(Error(err)))
 }
 
 function handleFromLogin(e) {
@@ -92,6 +130,7 @@ function handleFromLogin(e) {
     Cookies.set('email', formData.email);
     btnOpenPopup.classList.remove('hidden')
     popupLogin.close();
+    btnLogin.remove();
 
 }
 
@@ -143,11 +182,12 @@ function checkLocalStorage() {
 
 function createCard(cat) { //функция добавления карточки с котиком в дом
 
-    const newCardElement = new Card(cat, '#card-template', handleOpenCatImage);
+    const newCardElement = new Card(cat, '#card-template', handleOpenCatImage, handleOpenCatEdit, handleDeleteCat);
     cardContainer.prepend(newCardElement.getCardElement())
 }
 
 formCatAdd.addEventListener('submit', handleFromAddCat) //окно с попапом
+formCatEdit.addEventListener('submit', handleFromAddCat) //окно с попапом
 formAuthLogin.addEventListener('submit', handleFromLogin)
 btnOpenPopup.addEventListener('click', (event) => {
     event.preventDefault();
@@ -158,6 +198,7 @@ btnLogin.addEventListener('click', (event) => {
     event.preventDefault();
     popupLogin.open();
 })
+
 
 
 
@@ -182,6 +223,8 @@ if (!isAuth) {
 
 popupAdd.setEventListener();
 popupCatImage.setEventListener();
+popupEdit.setEventListener();
+
 popupLogin.setEventListener();
 checkLocalStorage();
 

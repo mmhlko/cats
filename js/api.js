@@ -1,5 +1,7 @@
 // https://cats.petiteweb.dev/api/single/mmhlko/show
 
+import { cats } from "./cats.js";
+
 //GET - получить информацию обо всех котах
 //https://cats.petiteweb.dev/api/single/{db}/show
 //
@@ -100,14 +102,14 @@ export const api = new Api(config);
 
 //console.log(api)
 
-/* const addAllCats = () => { //создаем локальный массив с экземплярами класса Cat
+const addAllCats = () => { //создаем локальный массив с экземплярами класса Cat
     cats.forEach(cat => {
         api.addNewCat(cat)
         .catch(err => console.log(Error(err)))
     })
 } 
 
-addAllCats();  */
+//addAllCats();
 
 //api.addNewCat({name: 'Мурка', id: 11, age: 11, description: 'Мой Муреночек'})
 //.then(data => console.log(data))

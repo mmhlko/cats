@@ -24,6 +24,8 @@
 
 .popup__container {
     max-width: 600px;
+    min-width: 200px;
+    width: 60%;
     background-color: var(--form-color);
     padding: 20px;
     position: relative;
@@ -47,4 +49,13 @@
 .popup__image {
     max-width: 100%;
     max-height: 100%;
+}
+
+.cat-info-title{
+    font-weight: 700;
+}
+
+.cat__info-value{
+    font-weight: normal;
+    margin-left: 5px;
 }
